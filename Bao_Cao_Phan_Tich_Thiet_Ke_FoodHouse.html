@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Báo cáo Phân tích và Thiết kế Hệ thống Website FoodHouse</title>
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 20mm 20mm 30mm;
+    mso-header-margin: 10mm;
+    mso-footer-margin: 10mm;
+  }
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 13pt;
+    line-height: 1.35;
+    color: #111827;
+    text-align: justify;
+  }
+  
+  /* TRANG BÌA */
+  .cover-page {
+    page-break-after: always;
+    text-align: center;
+    border: 3px double #1e3a8a;
+    padding: 30px 20px;
+    height: 880px;
+    box-sizing: border-box;
+  }
+  .cover-school {
+    font-size: 14pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #1e3a8a;
+    margin-bottom: 5px;
+  }
+  .cover-faculty {
+    font-size: 13pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #4b5563;
+    border-bottom: 2px solid #1e3a8a;
+    padding-bottom: 15px;
+    margin-bottom: 70px;
+  }
+  .cover-badge {
+    font-size: 13pt;
+    color: #b91c1c;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .cover-title {
+    font-size: 21pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    text-transform: uppercase;
+    line-height: 1.3;
+    margin-bottom: 25px;
+  }
+  .cover-sub {
+    font-size: 13.5pt;
+    font-style: italic;
+    color: #374151;
+    margin-bottom: 100px;
+  }
+  .cover-info {
+    text-align: left;
+    margin-left: 90px;
+    font-size: 13pt;
+    line-height: 1.8;
+  }
+  .cover-info strong {
+    color: #1e3a8a;
+    display: inline-block;
+    width: 220px;
+  }
+  .cover-footer {
+    margin-top: 90px;
+    font-size: 13pt;
+    font-weight: bold;
+    color: #4b5563;
+    text-transform: uppercase;
+  }
+
+  /* HEADINGS */
+  h1 {
+    font-size: 16.5pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    text-transform: uppercase;
+    border-bottom: 2px solid #1e3a8a;
+    padding-bottom: 5px;
+    margin-top: 30px;
+    margin-bottom: 14px;
+    page-break-before: always;
+  }
+  .no-break-h1 {
+    page-break-before: avoid !important;
+  }
+  h2 {
+    font-size: 14pt;
+    font-weight: bold;
+    color: #b91c1c;
+    margin-top: 22px;
+    margin-bottom: 10px;
+  }
+  h3 {
+    font-size: 13pt;
+    font-weight: bold;
+    font-style: italic;
+    color: #1e293b;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin-top: 6px;
+    margin-bottom: 8px;
+    text-indent: 1.25cm;
+  }
+  .no-indent {
+    text-indent: 0 !important;
+  }
+
+  /* BẢNG BIỂU */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 11.5pt;
+  }
+  th {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #1e3a8a;
+  }
+  td {
+    border: 1px solid #cbd5e1;
+    padding: 6px 8px;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td {
+    background-color: #f8fafc;
+  }
+  .text-center { text-align: center; }
+  .text-bold { font-weight: bold; }
+  .badge-pk {
+    display: inline-block;
+    background-color: #fee2e2;
+    color: #dc2626;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 9.5pt;
+  }
+  .badge-fk {
+    display: inline-block;
+    background-color: #dbeafe;
+    color: #1d4ed8;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 9.5pt;
+  }
+  
+  /* HỘP NỔI BẬT */
+  .callout-box {
+    background-color: #f0fdf4;
+    border-left: 5px solid #16a34a;
+    padding: 12px 16px;
+    margin: 15px 0;
+    font-size: 12pt;
+  }
+  .callout-title {
+    font-weight: bold;
+    color: #166534;
+    margin-bottom: 4px;
+  }
+
+  .img-container {
+    text-align: center;
+    margin: 18px 0;
+  }
+  .img-container img {
+    max-width: 95%;
+    height: auto;
+    border: 1px solid #cbd5e1;
+  }
+  .img-caption {
+    font-size: 11pt;
+    font-style: italic;
+    color: #4b5563;
+    margin-top: 6px;
+    text-align: center;
+    text-indent: 0;
+  }
+
+  ul, ol {
+    margin-top: 6px;
+    margin-bottom: 10px;
+    padding-left: 35px;
+  }
+  li {
+    margin-bottom: 5px;
+  }
+
+  code {
+    font-family: Consolas, 'Courier New', monospace;
+    background-color: #f1f5f9;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 11pt;
+    color: #c026d3;
+  }
+</style>
+</head>
+<body>
+
+<!-- TRANG BÌA -->
+<div class="cover-page">
+  <div class="cover-school">TRƯỜNG ĐẠI HỌC KINH DOANH VÀ CÔNG NGHỆ HÀ NỘI</div>
+  <div class="cover-faculty">KHOA CÔNG NGHỆ THÔNG TIN</div>
+  
+  <div class="cover-badge">BÁO CÁO ĐỒ ÁN MÔN HỌC</div>
+  <div class="cover-title">PHÂN TÍCH YÊU CẦU, THIẾT KẾ USE CASE VÀ CƠ SỞ DỮ LIỆU WEBSITE BÁN ĐỒ ĂN NHANH TRỰC TUYẾN FOODHOUSE</div>
+  <div class="cover-sub">Chuyên ngành: Kỹ thuật phần mềm & Hệ thống thông tin</div>
+  
+  <div class="cover-info">
+    <p class="no-indent"><strong>Sinh viên thực hiện:</strong> NGUYỄN CÔNG PHÚ</p>
+    <p class="no-indent"><strong>Mã sinh viên:</strong> 2924105628</p>
+    <p class="no-indent"><strong>Lớp chuyên ngành:</strong> TH29.26</p>
+    <p class="no-indent"><strong>Khoa:</strong> Công nghệ Thông tin</p>
+    <p class="no-indent"><strong>Giảng viên hướng dẫn:</strong> Giảng viên bộ môn CNTT</p>
+  </div>
+  
+  <div class="cover-footer">
+    Hà Nội - Năm 2026
+  </div>
+</div>
+
+<!-- LỜI NÓI ĐẦU -->
+<h1 class="no-break-h1">LỜI NÓI ĐẦU</h1>
+<p>
+Trong bối cảnh nền kinh tế số và thương mại điện tử phát triển mạnh mẽ như hiện nay, thói quen tiêu dùng của người dân, đặc biệt là giới trẻ và giới văn phòng, đã có sự dịch chuyển lớn từ phương thức mua sắm trực tiếp truyền thống sang đặt hàng trực tuyến. Lĩnh vực ẩm thực, dịch vụ ăn uống nhanh (Fast Food & Beverage) là một trong những ngành có tốc độ tăng trưởng ấn tượng nhất, đòi hỏi các đơn vị cung cấp phải có các giải pháp công nghệ đáp ứng nhu cầu gọi món nhanh chóng, thuận tiện, minh bạch và chính xác.
+</p>
+<p>
+Đề tài <strong>"Xây dựng Website bán đồ ăn nhanh trực tuyến FoodHouse"</strong> được nghiên cứu và triển khai nhằm giải quyết trọn vẹn bài toán kinh doanh ẩm thực trên môi trường Internet. Hệ thống không chỉ cung cấp giao diện bắt mắt, tối ưu trải nghiệm khách hàng từ khâu tra cứu thực đơn, chọn món, quản lý giỏ hàng đến đặt hàng giao tận nơi; mà còn xây dựng cơ chế cơ sở dữ liệu vững chắc, chuẩn hóa và bảo mật.
+</p>
+<p>
+Tài liệu này tập trung trình bày toàn bộ quy trình khoa học bao gồm: <strong>Khảo sát và Phân tích yêu cầu hệ thống</strong>, <strong>Thiết kế mô hình Use Case</strong> và <strong>Thiết kế Cơ sở dữ liệu quan hệ (ERD & Data Dictionary)</strong>. Đây là nền tảng cốt lõi định hình nên sự thành công, tính ổn định và khả năng mở rộng lâu dài của dự án FoodHouse.
+</p>
+
+<!-- CHƯƠNG 1 -->
+<h1>CHƯƠNG 1: KHẢO SÁT HIỆN TRẠNG VÀ PHÂN TÍCH YÊU CẦU HỆ THỐNG</h1>
+
+<h2>1.1. Bối cảnh và Tính cấp thiết của đề tài</h2>
+<p>
+Tại các đô thị hiện đại, nhịp sống bận rộn khiến nhu cầu sử dụng thức ăn nhanh như Burger, Gà rán, Pizza, khoai tây chiên và các loại đồ uống giải khát tăng cao liên tục. Tuy nhiên, các cửa hàng bán lẻ truyền thống thường gặp phải nhiều trở ngại:
+</p>
+<ul>
+  <li>Khách hàng phải trực tiếp đến cửa hàng, xếp hàng chờ đợi gọi món và thanh toán vào các khung giờ cao điểm (trưa và tối).</li>
+  <li>Quá trình ghi nhận đơn hàng qua điện thoại dễ xảy ra sai sót về số lượng, loại món ăn, địa chỉ giao hàng hoặc thất lạc thông tin.</li>
+  <li>Thiếu kênh trực quan để khách hàng theo dõi giá cả, chương trình ưu đãi, hình ảnh thực tế và tình trạng chế biến/vận chuyển của đơn hàng.</li>
+</ul>
+<p>
+Xuất phát từ thực tế đó, việc xây dựng website <strong>FoodHouse</strong> là hết sức cần thiết, mang lại lợi ích thiết thực cho cả người tiêu dùng lẫn chủ kinh doanh: giúp khách hàng thoải mái chọn món mọi lúc mọi nơi; đồng thời giúp cửa hàng tối ưu hóa quy trình vận hành và tiết kiệm chi phí nhân sự.
+</p>
+
+<h2>1.2. Mục tiêu và Phạm vi dự án</h2>
+<h3>1.2.1. Mục tiêu của hệ thống</h3>
+<ul>
+  <li><strong>Đối với khách hàng:</strong> Cung cấp một cổng đặt món trực tuyến thân thiện, tốc độ cao, hỗ trợ tìm kiếm linh hoạt, giỏ hàng thông minh và tra cứu đơn hàng theo thời gian thực mà không bắt buộc phải có tài khoản.</li>
+  <li><strong>Đối với người quản trị:</strong> Cung cấp giải pháp số hóa toàn diện quy trình quản lý danh mục, thực đơn món ăn, danh sách khách hàng và tiếp nhận, xử lý, cập nhật trạng thái đơn hàng.</li>
+  <li><strong>Đối với mục tiêu đào tạo:</strong> Ứng dụng nhuần nhuyễn các kiến thức về Phân tích thiết kế hệ thống thông tin, Lập trình ứng dụng Web (PHP/MySQL), Thiết kế cơ sở dữ liệu quan hệ và tối ưu hóa trải nghiệm người dùng (UX/UI).</li>
+</ul>
+
+<h3>1.2.2. Phạm vi của hệ thống</h3>
+<p>
+Hệ thống FoodHouse tập trung vào dịch vụ bán đồ ăn nhanh trực tuyến giao hàng tận nơi (Food Delivery) trong khu vực nội thành, phục vụ 5 danh mục món ăn chủ lực: <em>Burger, Gà rán, Đồ ăn kèm, Pizza và Đồ uống</em>.
+</p>
+
+<h2>1.3. Các đối tượng sử dụng hệ thống (Actors)</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 22%;">Đối tượng (Actor)</th>
+      <th style="width: 35%;">Mô tả vai trò</th>
+      <th style="width: 43%;">Quyền hạn chính trên hệ thống</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-bold">Khách vãng lai<br>(Guest)</td>
+      <td>Người dùng truy cập vào website nhưng chưa đăng nhập hoặc chưa đăng ký tài khoản.</td>
+      <td>Xem trang chủ, xem thực đơn, lọc/tìm kiếm món ăn, xem chi tiết món, thêm vào giỏ hàng, đặt hàng thanh toán và tra cứu tình trạng đơn hàng bằng Mã đơn/SĐT.</td>
+    </tr>
+    <tr>
+      <td class="text-bold">Khách hàng thành viên<br>(Customer)</td>
+      <td>Người dùng đã đăng ký tài khoản thành viên và đăng nhập vào hệ thống.</td>
+      <td>Toàn bộ quyền của Khách vãng lai, đồng thời được tự động điền sẵn thông tin khi đặt hàng, xem lịch sử các đơn hàng đã đặt, quản lý thông tin hồ sơ cá nhân.</td>
+    </tr>
+    <tr>
+      <td class="text-bold">Quản trị viên<br>(Administrator)</td>
+      <td>Nhân sự quản lý hệ thống, có quyền can thiệp vào dữ liệu quản trị website.</td>
+      <td>Quản lý danh mục món ăn, quản lý thực đơn (thêm/sửa/xóa món, cập nhật giá, trạng thái còn/hết hàng), quản lý đơn hàng (tiếp nhận, duyệt, chuyển trạng thái đơn hàng), thống kê doanh số.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>1.4. Yêu cầu chức năng chi tiết (Functional Requirements - FR)</h2>
+<p class="no-indent">
+Các yêu cầu chức năng của hệ thống FoodHouse được phân loại theo từng nhóm nghiệp vụ cốt lõi và mã hóa như sau:
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 12%;">Mã FR</th>
+      <th style="width: 25%;">Tên chức năng</th>
+      <th style="width: 45%;">Mô tả chi tiết nghiệp vụ</th>
+      <th style="width: 18%;">Tác nhân</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-center text-bold">FR-01</td>
+      <td>Đăng ký tài khoản</td>
+      <td>Cho phép người dùng tạo tài khoản mới bằng cách cung cấp Họ tên, Email, Mật khẩu, Số điện thoại và Địa chỉ. Hệ thống tự động kiểm tra trùng lặp email và mã hóa mật khẩu trước khi lưu.</td>
+      <td>Guest</td>
+    </tr>
+    <tr>
+      <td class="text-center text-bold">FR-02</td>
+      <td>Đăng nhập hệ thống</td>
+      <td>Xác thực người dùng qua Email và Mật khẩu. Hỗ trợ phân quyền tự động điều hướng sang giao diện Customer hoặc Admin tùy theo quyền hạn.</td>
+      <td>Guest / User</td>
+    </tr>
+    <tr>
+      <td class="text-center text-bold">FR-03</td>
+      <td>Đăng xuất hệ thống</td>
+      <td>Hủy phiên làm việc (Session) an toàn, đưa người dùng trở về trang chủ website.</td>
+      <td>Customer / Admin</td>
+    </tr>
+    <tr>
+      <td class="text-center text-bold">FR-04</td>
+      <td>Duyệt thực đơn theo danh mục</td>
+      <td>Hiển thị danh mục trực quan: Burger, Gà, Ăn kèm, Pizza, Đồ uống. Khi nhấn vào danh mục, hệ thống lọc danh sách món ăn tương ứng.</td>
+      <td>Tất cả</td>
+    </tr>
+    <tr>
+      <td class="text-center text-bold">FR-05</td>
+      <td>Tìm kiếm & Lọc món ăn</td>
+      <td>Hỗ trợ tìm kiếm theo từ khóa tên món hoặc mô tả; lọc theo các mức giá (&lt; 40k, 40k - 60k, &gt; 60k); sắp xếp theo giá tăng dần / giảm dần / mới nhất.</td>
+      <td>Tất cả</td>
+    </tr>
+    <tr>
+      <td class="text-center text-bold">FR-06</td>
+      <td>Xem chi tiết món ăn</td>
+      <td>Hiển thị đầy đủ thông tin: Ảnh minh họa phóng to, giá bán, giá gốc (tiết kiệm), thời gian chế biến dự kiến, thành phần nguyên liệu chi tiết và nút chọn số lượng đặt món.</td>
+      <td>Tất cả</td>
+    </tr>
+    <tr>
+      <td class="text-center text-bold">FR-07</td>
+      <td>Quản lý giỏ hàng (Cart)</td>
+      <td>Thêm món ăn vào giỏ (xử lý ngầm không gián đoạn trang qua AJAX), tăng/giảm số lượng món, xóa món khỏi giỏ, tự động tính tổng tiền hàng và phí vận chuyển cố định 15.000 VNĐ.</td>
+      <td>Guest / Customer</td>
+    </tr>
+    <tr>
+      <td class="text-center text-bold">FR-08</td>
+      <td>Đặt hàng & Thanh toán</td>
+      <td>Nhập thông tin người nhận (Họ tên, SĐT, Địa chỉ giao hàng, Ghi chú); lựa chọn hình thức thanh toán: COD (Tiền mặt khi nhận hàng) hoặc Chuyển khoản ngân hàng (Mã QR VietQR); hệ thống kiểm tra tính hợp lệ dữ liệu và tạo đơn.</td>
+      <td>Guest / Customer</td>
+    </tr>
+    <tr>
+      <td class="text-center text-bold">FR-09</td>
+      <td>Sinh mã đơn hàng tự động</td>
+      <td>Hệ thống tự động sinh mã định danh đơn hàng duy nhất theo định dạng chuẩn: <code>DH-YYMMDD-XXXX</code> để khách hàng và nhà hàng dễ dàng đối chiếu.</td>
+      <td>Hệ thống</td>
+    </tr>
+    <tr>
+      <td class="text-center text-bold">FR-10</td>
+      <td>Tra cứu & Theo dõi đơn</td>
+      <td>Cho phép tra cứu tình trạng đơn hàng mọi lúc bằng Mã đơn hàng hoặc Số điện thoại. Hiển thị thanh tiến trình 4 giai đoạn: <em>Chờ xác nhận &rarr; Đang chuẩn bị &rarr; Đang giao &rarr; Đã giao thành công</em>.</td>
+      <td>Tất cả</td>
+    </tr>
+    <tr>
+      <td class="text-center text-bold">FR-11</td>
+      <td>Lịch sử mua hàng</td>
+      <td>Hiển thị danh sách tất cả các đơn hàng đã đặt của thành viên đã đăng nhập kèm chi tiết từng món ăn và tổng tiền.</td>
+      <td>Customer</td>
+    </tr>
+    <tr>
+      <td class="text-center text-bold">FR-12</td>
+      <td>Quản lý danh mục (Admin)</td>
+      <td>Xem, thêm mới, sửa tên, biểu tượng icon, mô tả và thứ tự hiển thị của các danh mục món ăn.</td>
+      <td>Admin</td>
+    </tr>
+    <tr>
+      <td class="text-center text-bold">FR-13</td>
+      <td>Quản lý món ăn (Admin)</td>
+      <td>Xem danh sách thực đơn, thêm món ăn mới, cập nhật giá tiền, tải ảnh món ăn, mô tả nguyên liệu, gắn nhãn món bán chạy / món nổi bật, bật/tắt trạng thái kinh doanh.</td>
+      <td>Admin</td>
+    </tr>
+    <tr>
+      <td class="text-center text-bold">FR-14</td>
+      <td>Quản lý đơn hàng (Admin)</td>
+      <td>Xem toàn bộ đơn hàng phát sinh trên website, tìm kiếm đơn theo khách hàng, cập nhật chuyển trạng thái đơn (từ Chờ xác nhận sang Đang giao, Đã giao hoặc Hủy đơn).</td>
+      <td>Admin</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>1.5. Yêu cầu phi chức năng (Non-Functional Requirements - NFR)</h2>
+<ul>
+  <li><strong>Hiệu năng & Tốc độ (Performance):</strong> Thời gian tải trang ban đầu dưới 1.5 giây trong điều kiện mạng bình thường. Các thao tác cập nhật số lượng giỏ hàng được xử lý bất đồng bộ qua AJAX, phản hồi ngay lập tức mà không phải tải lại toàn bộ trang.</li>
+  <li><strong>Tính tương thích & Responsive (UI/UX):</strong> Giao diện hiển thị sắc nét, co giãn linh hoạt trên mọi kích thước màn hình từ điện thoại thông minh (Mobile), máy tính bảng (Tablet) đến máy tính để bàn (Desktop). Sử dụng hệ thống màu sắc theo chuẩn F&B (Màu cam ấm <code>#f97316</code> và đỏ thẫm <code>#b91c1c</code>) tạo cảm giác kích thích vị giác và ngon miệng.</li>
+  <li><strong>An toàn & Bảo mật (Security):</strong>
+    <ul>
+      <li>Mật khẩu người dùng được băm một chiều an toàn bằng thuật toán chuẩn <code>BCRYPT</code> qua hàm <code>password_hash()</code> của PHP, ngăn chặn hoàn toàn việc rò rỉ mật khẩu gốc.</li>
+      <li>Toàn bộ các câu truy vấn cơ sở dữ liệu được thực thi thông qua <strong>PDO Prepared Statements</strong> với các tham số ràng buộc (Binding Parameters), triệt tiêu nguy cơ tấn công SQL Injection.</li>
+      <li>Dữ liệu đầu vào từ người dùng được làm sạch thông qua hàm tiện ích <code>htmlspecialchars()</code> để vô hiệu hóa các mã kịch bản độc hại (chống tấn công XSS - Cross-Site Scripting).</li>
+    </ul>
+  </li>
+  <li><strong>Độ tin cậy & Tính sẵn sàng cao (Reliability & Dual-Database Engine):</strong>
+    Hệ thống sở hữu kiến trúc tự động nhận diện và khôi phục CSDL thông minh: ưu tiên kết nối MySQL trên XAMPP; trong trường hợp MySQL chưa được khởi động hoặc chưa tạo database, hệ thống tự động khởi tạo cơ sở dữ liệu và nạp script <code>database.sql</code>, hoặc chuyển tiếp mượt mà sang tệp cơ sở dữ liệu cục bộ <code>food_shop.sqlite</code> mà không làm gián đoạn trải nghiệm của người dùng.
+  </li>
+  <li><strong>Tính toàn vẹn dữ liệu (Data Integrity):</strong> Thao tác ghi nhận đơn hàng và chi tiết đơn hàng được bao bọc trong một khối giao dịch an toàn (<strong>Database Transaction</strong>: <code>beginTransaction()</code> &rarr; <code>commit()</code> &rarr; <code>rollBack()</code>), đảm bảo không bao giờ xảy ra tình trạng có đơn hàng nhưng thiếu chi tiết món ăn.</li>
+</ul>
+
+<!-- CHƯƠNG 2 -->
+<h1>CHƯƠNG 2: THIẾT KẾ USE CASE HỆ THỐNG</h1>
+
+<h2>2.1. Xác định Tác nhân (Actors)</h2>
+<p>
+Hệ thống FoodHouse gồm có 3 tác nhân chính tương tác trực tiếp với các chức năng:
+</p>
+<ol>
+  <li><strong>Khách vãng lai (Guest):</strong> Người dùng chưa thực hiện xác thực tài khoản. Tác nhân này có thể thực hiện mọi thao tác tìm hiểu thực đơn, đặt món và tra cứu đơn hàng một cách thuận tiện.</li>
+  <li><strong>Khách hàng thành viên (Customer):</strong> Kế thừa toàn bộ quyền của Khách vãng lai, đồng thời có thêm quyền hạn quản lý tài khoản, xem lịch sử đơn hàng của riêng mình và nhận các ưu đãi thành viên.</li>
+  <li><strong>Quản trị viên (Administrator):</strong> Người chịu trách nhiệm vận hành website, quản lý sản phẩm, danh mục, kiểm duyệt đơn hàng và theo dõi hoạt động kinh doanh.</li>
+</ol>
+
+<h2>2.2. Biểu đồ Use Case tổng quát</h2>
+<p>
+Dưới đây là sơ đồ Use Case tổng quát thể hiện toàn bộ các ca sử dụng của hệ thống FoodHouse và mối liên kết với các tác nhân:
+</p>
+
+<div class="img-container">
+  <img src="usecase_diagram.png" alt="Biểu đồ Use Case Tổng quát FoodHouse">
+  <div class="img-caption">Hình 2.1: Biểu đồ Use Case tổng quát hệ thống Website FoodHouse</div>
+</div>
+
+<h2>2.3. Ma trận phân quyền Tác nhân - Ca sử dụng</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 8%;">STT</th>
+      <th style="width: 37%;">Tên Use Case</th>
+      <th style="width: 18%;">Guest</th>
+      <th style="width: 18%;">Customer</th>
+      <th style="width: 19%;">Administrator</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-center">1</td>
+      <td>Xem Trang chủ & Thực đơn món ăn</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#10004;</td>
+    </tr>
+    <tr>
+      <td class="text-center">2</td>
+      <td>Tìm kiếm & Lọc món ăn theo giá/loại</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#10004;</td>
+    </tr>
+    <tr>
+      <td class="text-center">3</td>
+      <td>Xem chi tiết món & nguyên liệu</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#10004;</td>
+    </tr>
+    <tr>
+      <td class="text-center">4</td>
+      <td>Thêm & Cập nhật giỏ hàng (AJAX)</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#10004;</td>
+    </tr>
+    <tr>
+      <td class="text-center">5</td>
+      <td>Đặt hàng & Thanh toán (Checkout)</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#8212;</td>
+    </tr>
+    <tr>
+      <td class="text-center">6</td>
+      <td>Tra cứu tình trạng đơn hàng</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#10004;</td>
+    </tr>
+    <tr>
+      <td class="text-center">7</td>
+      <td>Đăng ký tài khoản thành viên</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#8212;</td>
+      <td class="text-center">&#8212;</td>
+    </tr>
+    <tr>
+      <td class="text-center">8</td>
+      <td>Đăng nhập & Đăng xuất</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#10004;</td>
+    </tr>
+    <tr>
+      <td class="text-center">9</td>
+      <td>Xem lịch sử các đơn hàng của mình</td>
+      <td class="text-center">&#8212;</td>
+      <td class="text-center">&#10004;</td>
+      <td class="text-center">&#8212;</td>
+    </tr>
+    <tr>
+      <td class="text-center">10</td>
+      <td>Quản lý Danh mục món ăn</td>
+      <td class="text-center">&#8212;</td>
+      <td class="text-center">&#8212;</td>
+      <td class="text-center">&#10004;</td>
+    </tr>
+    <tr>
+      <td class="text-center">11</td>
+      <td>Quản lý Món ăn (Thêm/Sửa/Xóa/Giá)</td>
+      <td class="text-center">&#8212;</td>
+      <td class="text-center">&#8212;</td>
+      <td class="text-center">&#10004;</td>
+    </tr>
+    <tr>
+      <td class="text-center">12</td>
+      <td>Quản lý & Cập nhật trạng thái Đơn</td>
+      <td class="text-center">&#8212;</td>
+      <td class="text-center">&#8212;</td>
+      <td class="text-center">&#10004;</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>2.4. Đặc tả kịch bản Use Case chi tiết (Use Case Specifications)</h2>
+
+<h3>2.4.1. Use Case UC-01: Đăng ký tài khoản mới</h3>
+<table>
+  <tr>
+    <th style="width: 25%;">Tên Use Case</th>
+    <td class="text-bold">UC-01: Đăng ký tài khoản (Register)</td>
+  </tr>
+  <tr>
+    <th>Tác nhân (Actor)</th>
+    <td>Khách vãng lai (Guest)</td>
+  </tr>
+  <tr>
+    <th>Mô tả tóm tắt</th>
+    <td>Cho phép người dùng chưa có tài khoản đăng ký trở thành thành viên của hệ thống FoodHouse.</td>
+  </tr>
+  <tr>
+    <th>Tiền điều kiện</th>
+    <td>Người dùng đã truy cập vào website và chưa đăng nhập.</td>
+  </tr>
+  <tr>
+    <th>Hậu điều kiện</th>
+    <td>Một bản ghi tài khoản mới được ghi vào bảng <code>users</code>; phiên làm việc được khởi tạo (tự động đăng nhập).</td>
+  </tr>
+  <tr>
+    <th>Luồng sự kiện chính (Main Flow)</th>
+    <td>
+      <ol>
+        <li>Người dùng nhấn vào liên kết "Đăng ký" trên thanh điều hướng.</li>
+        <li>Hệ thống hiển thị biểu mẫu đăng ký bao gồm: Họ tên, Email, Mật khẩu, Xác nhận mật khẩu, Số điện thoại, Địa chỉ.</li>
+        <li>Người dùng điền đầy đủ thông tin và nhấn nút "Đăng Ký Tài Khoản".</li>
+        <li>Hệ thống kiểm tra tính hợp lệ dữ liệu (không để trống, email đúng định dạng, mật khẩu khớp nhau, email chưa từng đăng ký).</li>
+        <li>Hệ thống mã hóa mật khẩu bằng <code>password_hash()</code> với thuật toán BCRYPT.</li>
+        <li>Hệ thống lưu thông tin vào cơ sở dữ liệu với vai trò mặc định là <code>customer</code>.</li>
+        <li>Hệ thống tạo phiên đăng nhập thành công và chuyển hướng người dùng về Trang chủ kèm thông báo chào mừng.</li>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <th>Luồng rẽ nhánh (Alternative Flow)</th>
+    <td>
+      <strong>4a. Email đã tồn tại:</strong> Hệ thống giữ lại các thông tin đã nhập (trừ mật khẩu) và thông báo: <em>"Email này đã được đăng ký trên hệ thống!"</em>.<br>
+      <strong>4b. Mật khẩu xác nhận không khớp:</strong> Hệ thống yêu cầu người dùng nhập lại mật khẩu xác nhận.
+    </td>
+  </tr>
+</table>
+
+<h3>2.4.2. Use Case UC-04: Quản lý giỏ hàng trực tuyến</h3>
+<table>
+  <tr>
+    <th style="width: 25%;">Tên Use Case</th>
+    <td class="text-bold">UC-04: Quản lý giỏ hàng (Cart Management)</td>
+  </tr>
+  <tr>
+    <th>Tác nhân (Actor)</th>
+    <td>Khách vãng lai (Guest), Khách hàng (Customer)</td>
+  </tr>
+  <tr>
+    <th>Mô tả tóm tắt</th>
+    <td>Cho phép người dùng thêm món ăn vào giỏ, điều chỉnh số lượng tăng/giảm hoặc xóa món ăn khỏi giỏ hàng.</td>
+  </tr>
+  <tr>
+    <th>Tiền điều kiện</th>
+    <td>Người dùng đang duyệt thực đơn hoặc trang chi tiết món ăn.</td>
+  </tr>
+  <tr>
+    <th>Hậu điều kiện</th>
+    <td>Thông tin giỏ hàng trong Session (hoặc Database) được cập nhật đồng bộ; hiển thị tổng tiền chính xác.</td>
+  </tr>
+  <tr>
+    <th>Luồng sự kiện chính (Main Flow)</th>
+    <td>
+      <ol>
+        <li>Người dùng nhấn nút "Thêm vào giỏ" tại danh sách món hoặc trang chi tiết món ăn.</li>
+        <li>Hệ thống gửi yêu cầu không đồng bộ (AJAX POST) tới <code>api/cart_action.php</code>.</li>
+        <li>Hệ thống kiểm tra món ăn có tồn tại trong CSDL và đang ở trạng thái kinh doanh (status = 1) hay không.</li>
+        <li>Nếu món đã có trong giỏ hàng, hệ thống tăng số lượng lên; nếu chưa có, hệ thống thêm mới món vào giỏ hàng.</li>
+        <li>Hệ thống tính lại tổng tiền giỏ hàng, tổng số lượng món và trả về kết quả dạng JSON.</li>
+        <li>Giao diện JavaScript cập nhật tức thì số lượng trên biểu tượng giỏ hàng ở thanh Navbar và hiển thị thông báo "Đã thêm món vào giỏ hàng!".</li>
+        <li>Người dùng có thể bấm vào xem trang Giỏ hàng (<code>cart.php</code>) để tăng/giảm số lượng hoặc xóa hẳn món.</li>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <th>Luồng rẽ nhánh (Alternative Flow)</th>
+    <td>
+      <strong>3a. Món ăn tạm hết hàng:</strong> Hệ thống từ chối thêm vào giỏ và thông báo: <em>"Món ăn hiện tại đang tạm hết hàng, quý khách vui lòng chọn món khác!"</em>.
+    </td>
+  </tr>
+</table>
+
+<h3>2.4.3. Use Case UC-05: Đặt hàng & Thanh toán (Checkout)</h3>
+<table>
+  <tr>
+    <th style="width: 25%;">Tên Use Case</th>
+    <td class="text-bold">UC-05: Đặt hàng và Thanh toán (Checkout)</td>
+  </tr>
+  <tr>
+    <th>Tác nhân (Actor)</th>
+    <td>Khách vãng lai (Guest), Khách hàng (Customer)</td>
+  </tr>
+  <tr>
+    <th>Mô tả tóm tắt</th>
+    <td>Người dùng nhập thông tin giao nhận, lựa chọn hình thức thanh toán và gửi đơn hàng tới cửa hàng.</td>
+  </tr>
+  <tr>
+    <th>Tiền điều kiện</th>
+    <td>Giỏ hàng của người dùng phải có ít nhất 01 món ăn.</td>
+  </tr>
+  <tr>
+    <th>Hậu điều kiện</th>
+    <td>Hệ thống ghi nhận đơn hàng mới vào bảng <code>orders</code> và các món ăn tương ứng vào bảng <code>order_items</code>; giỏ hàng được làm sạch.</td>
+  </tr>
+  <tr>
+    <th>Luồng sự kiện chính (Main Flow)</th>
+    <td>
+      <ol>
+        <li>Tại trang Giỏ hàng, người dùng bấm nút "Tiến Hành Đặt Hàng" để chuyển sang <code>checkout.php</code>.</li>
+        <li>Nếu người dùng đã đăng nhập, hệ thống tự động điền sẵn Họ tên, SĐT và Địa chỉ từ hồ sơ cá nhân.</li>
+        <li>Người dùng kiểm tra thông tin nhận hàng, nhập ghi chú (nếu có, ví dụ: <em>"Giao trước 12h, ít đá, không cay"</em>).</li>
+        <li>Người dùng chọn phương thức thanh toán: <strong>Thanh toán khi nhận hàng (COD)</strong> hoặc <strong>Chuyển khoản ngân hàng qua mã QR (Banking)</strong>.</li>
+        <li>Người dùng bấm nút "Xác Nhận Đặt Hàng".</li>
+        <li>Hệ thống bắt đầu một Transaction cơ sở dữ liệu:
+          <ul>
+            <li>Tạo mã đơn ngẫu nhiên duy nhất (<code>DH-YYMMDD-XXXX</code>).</li>
+            <li>Lưu bản ghi vào bảng <code>orders</code> với trạng thái ban đầu là <em>"Chờ xác nhận"</em>.</li>
+            <li>Lặp qua từng món trong giỏ để lưu vào bảng <code>order_items</code> kèm ảnh, tên món, đơn giá tại thời điểm đặt và thành tiền.</li>
+            <li>Xóa sạch giỏ hàng trong Session.</li>
+            <li>Commit Transaction.</li>
+          </ul>
+        </li>
+        <li>Hệ thống chuyển hướng sang trang Hoàn tất đơn hàng (<code>order_success.php</code>) hiển thị hóa đơn chi tiết và mã đơn hàng để khách hàng tiện theo dõi.</li>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <th>Luồng rẽ nhánh (Alternative Flow)</th>
+    <td>
+      <strong>3a. Thiếu thông tin bắt buộc:</strong> Nếu người dùng để trống Họ tên, SĐT hoặc Địa chỉ, hệ thống cảnh báo cụ thể trường dữ liệu còn thiếu.<br>
+      <strong>6a. Lỗi hệ thống cơ sở dữ liệu:</strong> Hệ thống tự động Rollback giao dịch, giữ nguyên giỏ hàng và thông báo người dùng thử lại.
+    </td>
+  </tr>
+</table>
+
+<h3>2.4.4. Use Case UC-06: Tra cứu & Theo dõi đơn hàng</h3>
+<table>
+  <tr>
+    <th style="width: 25%;">Tên Use Case</th>
+    <td class="text-bold">UC-06: Tra cứu & Theo dõi trạng thái đơn hàng</td>
+  </tr>
+  <tr>
+    <th>Tác nhân (Actor)</th>
+    <td>Tất cả người dùng (Guest / Customer / Admin)</td>
+  </tr>
+  <tr>
+    <th>Mô tả tóm tắt</th>
+    <td>Cho phép người dùng kiểm tra tiến độ giao hàng và thông tin đơn hàng bất kỳ lúc nào mà không cần đăng nhập.</td>
+  </tr>
+  <tr>
+    <th>Tiền điều kiện</th>
+    <td>Đơn hàng đã được tạo thành công trên hệ thống.</td>
+  </tr>
+  <tr>
+    <th>Hậu điều kiện</th>
+    <td>Hiển thị trạng thái thời gian thực và chi tiết các món trong đơn hàng.</td>
+  </tr>
+  <tr>
+    <th>Luồng sự kiện chính (Main Flow)</th>
+    <td>
+      <ol>
+        <li>Người dùng truy cập vào trang "Tra cứu đơn hàng" (<code>orders.php</code>).</li>
+        <li>Người dùng nhập <strong>Mã đơn hàng</strong> (ví dụ: <code>DH261020-5628</code>) hoặc <strong>Số điện thoại đặt hàng</strong> vào ô tra cứu và bấm "Tìm kiếm".</li>
+        <li>Hệ thống truy vấn cơ sở dữ liệu theo mã đơn hoặc số điện thoại.</li>
+        <li>Hệ thống hiển thị danh sách đơn hàng tìm được gồm: Mã đơn, Thời gian đặt, Người nhận, Tổng tiền, Hình thức thanh toán và Trạng thái đơn hàng.</li>
+        <li>Hệ thống hiển thị thanh tiến trình 4 giai đoạn trực quan giúp khách hàng biết đơn đang ở bước nào (Chờ xác nhận &rarr; Đang chuẩn bị món &rarr; Đang giao hàng &rarr; Đã giao thành công).</li>
+      </ol>
+    </td>
+  </tr>
+  <tr>
+    <th>Luồng rẽ nhánh (Alternative Flow)</th>
+    <td>
+      <strong>3a. Không tìm thấy đơn hàng:</strong> Hệ thống thông báo: <em>"Không tìm thấy đơn hàng nào phù hợp với mã hoặc số điện thoại bạn vừa nhập. Vui lòng kiểm tra lại!"</em>.
+    </td>
+  </tr>
+</table>
+
+<!-- CHƯƠNG 3 -->
+<h1>CHƯƠNG 3: THIẾT KẾ CƠ SỞ DỮ LIỆU (DATABASE DESIGN)</h1>
+
+<h2>3.1. Phân tích Mô hình Thực thể và Các mối quan hệ</h2>
+<p>
+Cơ sở dữ liệu của hệ thống FoodHouse được đặt tên là <code>food_shop</code>, được chuẩn hóa ở dạng chuẩn 3 (3NF - Third Normal Form) nhằm đảm bảo tính toàn vẹn, tránh dư thừa dữ liệu và tối ưu hiệu suất truy vấn. Cơ sở dữ liệu bao gồm 5 thực thể chính:
+</p>
+<ul>
+  <li><strong>users (Người dùng):</strong> Lưu trữ hồ sơ người dùng bao gồm khách hàng và ban quản trị, đóng vai trò xác thực tài khoản.</li>
+  <li><strong>categories (Danh mục món):</strong> Lưu thông tin các phân loại thực đơn (Burger, Gà, Ăn kèm, Pizza, Đồ uống).</li>
+  <li><strong>products (Món ăn):</strong> Lưu trữ thông tin chi tiết từng sản phẩm món ăn, giá bán, thành phần nguyên liệu, hình ảnh đại diện.</li>
+  <li><strong>orders (Đơn hàng):</strong> Đóng vai trò là hóa đơn tổng, ghi nhận thông tin khách mua, địa chỉ nhận hàng, phương thức thanh toán và tổng số tiền thanh toán.</li>
+  <li><strong>order_items (Chi tiết đơn hàng):</strong> Lưu trữ chi tiết từng món ăn có trong một đơn hàng cụ thể, số lượng mua, đơn giá tại thời điểm giao dịch và thành tiền.</li>
+</ul>
+
+<h3>Các mối quan hệ dữ liệu cốt lõi:</h3>
+<ol>
+  <li><strong>Quan hệ categories - products (1 - N):</strong> Một danh mục ẩm thực có thể chứa nhiều món ăn (<code>1 - N</code>). Một món ăn bắt buộc phải thuộc về một danh mục cụ thể (khóa ngoại <code>category_id</code> tham chiếu đến <code>categories.id</code>). Hành vi khi xóa danh mục: <code>ON DELETE CASCADE</code>.</li>
+  <li><strong>Quan hệ users - orders (1 - N):</strong> Một người dùng thành viên có thể đặt nhiều đơn hàng theo thời gian (<code>1 - N</code>). Đơn hàng có thể liên kết với một <code>user_id</code> hoặc để trống (<code>NULL</code>) trong trường hợp khách vãng lai đặt hàng không qua đăng nhập. Hành vi khi xóa tài khoản: <code>ON DELETE SET NULL</code> để lưu vết lịch sử hóa đơn.</li>
+  <li><strong>Quan hệ orders - order_items (1 - N):</strong> Một đơn hàng bao gồm một hoặc nhiều chi tiết món ăn (<code>1 - N</code>). Mỗi chi tiết món ăn thuộc về duy nhất một đơn hàng (khóa ngoại <code>order_id</code> tham chiếu đến <code>orders.id</code>). Hành vi khi hủy/xóa đơn: <code>ON DELETE CASCADE</code>.</li>
+  <li><strong>Quan hệ products - order_items (1 - N):</strong> Một món ăn có thể xuất hiện trong nhiều chi tiết đơn hàng của nhiều khách hàng khác nhau. Khóa ngoại <code>product_id</code> trong bảng <code>order_items</code> tham chiếu đến <code>products.id</code> với hành vi <code>ON DELETE SET NULL</code>, kết hợp lưu trữ trực tiếp <code>product_name</code> và <code>price</code> để đảm bảo hóa đơn quá khứ không bị thay đổi khi sản phẩm cập nhật giá trong tương lai.</li>
+</ol>
+
+<h2>3.2. Sơ đồ Thực thể Liên kết (ERD Diagram)</h2>
+<p>
+Dưới đây là sơ đồ chi tiết biểu diễn cấu trúc các bảng và mối liên kết khóa ngoại giữa các bảng trong cơ sở dữ liệu FoodHouse:
+</p>
+
+<div class="img-container">
+  <img src="erd_diagram.png" alt="Sơ đồ Thực thể Liên kết ERD FoodHouse">
+  <div class="img-caption">Hình 3.1: Sơ đồ Thực thể Liên kết (ERD) Cơ sở dữ liệu FoodHouse</div>
+</div>
+
+<h2>3.3. Từ điển dữ liệu chi tiết (Data Dictionary)</h2>
+
+<h3>3.3.1. Bảng <code>users</code> (Quản lý người dùng & phân quyền)</h3>
+<p class="no-indent">Bảng lưu trữ danh sách tài khoản của hệ thống bao gồm cả khách hàng và quản trị viên.</p>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 18%;">Tên cột</th>
+      <th style="width: 18%;">Kiểu dữ liệu</th>
+      <th style="width: 12%;">Khóa</th>
+      <th style="width: 12%;">Null</th>
+      <th style="width: 15%;">Mặc định</th>
+      <th style="width: 25%;">Ý nghĩa / Mô tả</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-bold">id</td>
+      <td>INT</td>
+      <td class="text-center"><span class="badge-pk">PK</span></td>
+      <td class="text-center">No</td>
+      <td>AUTO_INCREMENT</td>
+      <td>Mã định danh duy nhất của người dùng</td>
+    </tr>
+    <tr>
+      <td class="text-bold">fullname</td>
+      <td>VARCHAR(100)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Họ và tên đầy đủ của người dùng</td>
+    </tr>
+    <tr>
+      <td class="text-bold">email</td>
+      <td>VARCHAR(100)</td>
+      <td class="text-center"><span class="badge-pk">UNIQUE</span></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Email đăng nhập (duy nhất trên toàn hệ thống)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">password</td>
+      <td>VARCHAR(255)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Mật khẩu đã được mã hóa BCRYPT (60 ký tự)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">phone</td>
+      <td>VARCHAR(20)</td>
+      <td class="text-center"></td>
+      <td class="text-center">Yes</td>
+      <td>NULL</td>
+      <td>Số điện thoại liên hệ</td>
+    </tr>
+    <tr>
+      <td class="text-bold">address</td>
+      <td>VARCHAR(255)</td>
+      <td class="text-center"></td>
+      <td class="text-center">Yes</td>
+      <td>NULL</td>
+      <td>Địa chỉ giao hàng mặc định</td>
+    </tr>
+    <tr>
+      <td class="text-bold">role</td>
+      <td>VARCHAR(20)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>'customer'</td>
+      <td>Vai trò người dùng: 'admin' hoặc 'customer'</td>
+    </tr>
+    <tr>
+      <td class="text-bold">created_at</td>
+      <td>DATETIME</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>CURRENT_TIMESTAMP</td>
+      <td>Thời điểm tạo tài khoản</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>3.3.2. Bảng <code>categories</code> (Danh mục phân loại món ăn)</h3>
+<p class="no-indent">Bảng lưu trữ các danh mục ẩm thực chính (Burger, Gà, Ăn kèm, Pizza, Đồ uống).</p>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 18%;">Tên cột</th>
+      <th style="width: 18%;">Kiểu dữ liệu</th>
+      <th style="width: 12%;">Khóa</th>
+      <th style="width: 12%;">Null</th>
+      <th style="width: 15%;">Mặc định</th>
+      <th style="width: 25%;">Ý nghĩa / Mô tả</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-bold">id</td>
+      <td>INT</td>
+      <td class="text-center"><span class="badge-pk">PK</span></td>
+      <td class="text-center">No</td>
+      <td>AUTO_INCREMENT</td>
+      <td>Mã định danh danh mục</td>
+    </tr>
+    <tr>
+      <td class="text-bold">name</td>
+      <td>VARCHAR(100)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Tên danh mục (ví dụ: Burger, Gà, Pizza...)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">slug</td>
+      <td>VARCHAR(120)</td>
+      <td class="text-center"><span class="badge-pk">UNIQUE</span></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Chuỗi định danh URL thân thiện (vd: burger, ga)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">description</td>
+      <td>VARCHAR(255)</td>
+      <td class="text-center"></td>
+      <td class="text-center">Yes</td>
+      <td>NULL</td>
+      <td>Mô tả ngắn gọn về nhóm món ăn</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>3.3.3. Bảng <code>products</code> (Danh sách món ăn / Thực đơn)</h3>
+<p class="no-indent">Bảng lưu trữ toàn bộ các món ăn kinh doanh tại FoodHouse kèm hình ảnh, giá cả và nguyên liệu.</p>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 18%;">Tên cột</th>
+      <th style="width: 18%;">Kiểu dữ liệu</th>
+      <th style="width: 12%;">Khóa</th>
+      <th style="width: 12%;">Null</th>
+      <th style="width: 15%;">Mặc định</th>
+      <th style="width: 25%;">Ý nghĩa / Mô tả</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-bold">id</td>
+      <td>INT</td>
+      <td class="text-center"><span class="badge-pk">PK</span></td>
+      <td class="text-center">No</td>
+      <td>AUTO_INCREMENT</td>
+      <td>Mã định danh món ăn</td>
+    </tr>
+    <tr>
+      <td class="text-bold">category_id</td>
+      <td>INT</td>
+      <td class="text-center"><span class="badge-fk">FK</span></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Khóa ngoại tham chiếu tới bảng <code>categories.id</code></td>
+    </tr>
+    <tr>
+      <td class="text-bold">name</td>
+      <td>VARCHAR(150)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Tên món ăn (Burger bò Úc, Gà sốt BBQ...)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">slug</td>
+      <td>VARCHAR(170)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Đường dẫn tĩnh thân thiện SEO cho món ăn</td>
+    </tr>
+    <tr>
+      <td class="text-bold">price</td>
+      <td>DECIMAL(12, 0)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Giá bán hiện tại áp dụng cho khách (VNĐ)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">original_price</td>
+      <td>DECIMAL(12, 0)</td>
+      <td class="text-center"></td>
+      <td class="text-center">Yes</td>
+      <td>NULL</td>
+      <td>Giá gốc trước khi giảm (dùng gạch ngang khuyến mãi)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">image</td>
+      <td>VARCHAR(500)</td>
+      <td class="text-center"></td>
+      <td class="text-center">Yes</td>
+      <td>NULL</td>
+      <td>Đường dẫn URL ảnh chất lượng cao của món ăn</td>
+    </tr>
+    <tr>
+      <td class="text-bold">description</td>
+      <td>TEXT</td>
+      <td class="text-center"></td>
+      <td class="text-center">Yes</td>
+      <td>NULL</td>
+      <td>Mô tả chi tiết hương vị, nguyên liệu chế biến</td>
+    </tr>
+    <tr>
+      <td class="text-bold">is_featured</td>
+      <td>TINYINT(1)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>0</td>
+      <td>1: Món nổi bật hiển thị ở Banner/Trang chủ; 0: Bình thường</td>
+    </tr>
+    <tr>
+      <td class="text-bold">status</td>
+      <td>TINYINT(1)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>1</td>
+      <td>1: Đang bán (Available); 0: Tạm hết hàng</td>
+    </tr>
+    <tr>
+      <td class="text-bold">created_at</td>
+      <td>DATETIME</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>CURRENT_TIMESTAMP</td>
+      <td>Thời gian thêm món ăn vào hệ thống</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>3.3.4. Bảng <code>orders</code> (Đơn đặt hàng)</h3>
+<p class="no-indent">Bảng lưu trữ thông tin hóa đơn giao dịch, người nhận hàng và trạng thái đơn hàng.</p>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 18%;">Tên cột</th>
+      <th style="width: 18%;">Kiểu dữ liệu</th>
+      <th style="width: 12%;">Khóa</th>
+      <th style="width: 12%;">Null</th>
+      <th style="width: 15%;">Mặc định</th>
+      <th style="width: 25%;">Ý nghĩa / Mô tả</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-bold">id</td>
+      <td>INT</td>
+      <td class="text-center"><span class="badge-pk">PK</span></td>
+      <td class="text-center">No</td>
+      <td>AUTO_INCREMENT</td>
+      <td>Mã định danh đơn hàng</td>
+    </tr>
+    <tr>
+      <td class="text-bold">order_code</td>
+      <td>VARCHAR(30)</td>
+      <td class="text-center"><span class="badge-pk">UNIQUE</span></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Mã đơn hàng hiển thị (vd: <code>DH261020-5628</code>)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">user_id</td>
+      <td>INT</td>
+      <td class="text-center"><span class="badge-fk">FK</span></td>
+      <td class="text-center">Yes</td>
+      <td>NULL</td>
+      <td>Khóa ngoại tham chiếu tới <code>users.id</code> (NULL nếu là khách vãng lai)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">customer_name</td>
+      <td>VARCHAR(100)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Họ và tên người nhận hàng</td>
+    </tr>
+    <tr>
+      <td class="text-bold">customer_phone</td>
+      <td>VARCHAR(20)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Số điện thoại nhận hàng (dùng để tra cứu)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">customer_email</td>
+      <td>VARCHAR(100)</td>
+      <td class="text-center"></td>
+      <td class="text-center">Yes</td>
+      <td>NULL</td>
+      <td>Email nhận hóa đơn điện tử</td>
+    </tr>
+    <tr>
+      <td class="text-bold">customer_address</td>
+      <td>VARCHAR(255)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Địa chỉ cụ thể nhận đồ ăn</td>
+    </tr>
+    <tr>
+      <td class="text-bold">note</td>
+      <td>TEXT</td>
+      <td class="text-center"></td>
+      <td class="text-center">Yes</td>
+      <td>NULL</td>
+      <td>Ghi chú cho bếp và shipper</td>
+    </tr>
+    <tr>
+      <td class="text-bold">payment_method</td>
+      <td>VARCHAR(50)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>'COD'</td>
+      <td>Hình thức: 'COD' hoặc 'Banking'</td>
+    </tr>
+    <tr>
+      <td class="text-bold">shipping_fee</td>
+      <td>DECIMAL(12, 0)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>15000</td>
+      <td>Phí giao hàng nội thành (mặc định 15.000 VNĐ)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">total_amount</td>
+      <td>DECIMAL(12, 0)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Tổng tiền đơn hàng bao gồm tiền món + phí ship</td>
+    </tr>
+    <tr>
+      <td class="text-bold">status</td>
+      <td>VARCHAR(50)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>'Chờ xác nhận'</td>
+      <td>Trạng thái: 'Chờ xác nhận', 'Đang chuẩn bị', 'Đang giao', 'Đã giao', 'Đã hủy'</td>
+    </tr>
+    <tr>
+      <td class="text-bold">created_at</td>
+      <td>DATETIME</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>CURRENT_TIMESTAMP</td>
+      <td>Thời điểm khách hàng gửi đơn hàng</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>3.3.5. Bảng <code>order_items</code> (Chi tiết từng món trong đơn hàng)</h3>
+<p class="no-indent">Bảng lưu trữ thông tin từng món ăn thuộc một đơn hàng cụ thể.</p>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 18%;">Tên cột</th>
+      <th style="width: 18%;">Kiểu dữ liệu</th>
+      <th style="width: 12%;">Khóa</th>
+      <th style="width: 12%;">Null</th>
+      <th style="width: 15%;">Mặc định</th>
+      <th style="width: 25%;">Ý nghĩa / Mô tả</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="text-bold">id</td>
+      <td>INT</td>
+      <td class="text-center"><span class="badge-pk">PK</span></td>
+      <td class="text-center">No</td>
+      <td>AUTO_INCREMENT</td>
+      <td>Mã định danh chi tiết đơn hàng</td>
+    </tr>
+    <tr>
+      <td class="text-bold">order_id</td>
+      <td>INT</td>
+      <td class="text-center"><span class="badge-fk">FK</span></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Khóa ngoại tham chiếu tới <code>orders.id</code> (CASCADE)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">product_id</td>
+      <td>INT</td>
+      <td class="text-center"><span class="badge-fk">FK</span></td>
+      <td class="text-center">Yes</td>
+      <td>NULL</td>
+      <td>Khóa ngoại tham chiếu tới <code>products.id</code> (SET NULL)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">product_name</td>
+      <td>VARCHAR(150)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Tên món ăn tại thời điểm mua (bảo toàn lịch sử)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">product_image</td>
+      <td>VARCHAR(500)</td>
+      <td class="text-center"></td>
+      <td class="text-center">Yes</td>
+      <td>NULL</td>
+      <td>Ảnh minh họa món ăn hiển thị trên hóa đơn</td>
+    </tr>
+    <tr>
+      <td class="text-bold">price</td>
+      <td>DECIMAL(12, 0)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Đơn giá món ăn tại thời điểm đặt hàng</td>
+    </tr>
+    <tr>
+      <td class="text-bold">quantity</td>
+      <td>INT</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>1</td>
+      <td>Số lượng món ăn đặt mua (&gt;= 1)</td>
+    </tr>
+    <tr>
+      <td class="text-bold">subtotal</td>
+      <td>DECIMAL(12, 0)</td>
+      <td class="text-center"></td>
+      <td class="text-center">No</td>
+      <td>None</td>
+      <td>Thành tiền cho món = price &times; quantity</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>3.4. Ràng buộc toàn vẹn & Hành vi Khóa ngoại</h2>
+<div class="callout-box">
+  <div class="callout-title">TỔNG HỢP CÁC RÀNG BUỘC TOÀN VẸN (INTEGRITY CONSTRAINTS):</div>
+  <ul>
+    <li><strong>fk_products_category:</strong> Liên kết giữa <code>products.category_id</code> và <code>categories.id</code>. Khi một danh mục bị xóa, toàn bộ các món ăn thuộc danh mục đó sẽ tự động bị xóa theo (<code>ON DELETE CASCADE</code>) nhằm đảm bảo không tồn tại món ăn mồ côi danh mục.</li>
+    <li><strong>fk_orders_user:</strong> Liên kết giữa <code>orders.user_id</code> và <code>users.id</code>. Khi một tài khoản người dùng bị xóa khỏi hệ thống, trường <code>user_id</code> trong các đơn hàng tương ứng sẽ được đặt về giá trị <code>NULL</code> (<code>ON DELETE SET NULL</code>), giúp duy trì trọn vẹn số liệu thống kê kế toán và lịch sử giao hàng.</li>
+    <li><strong>fk_order_items_order:</strong> Liên kết giữa <code>order_items.order_id</code> và <code>orders.id</code>. Khi một đơn hàng bị hủy bỏ hoàn toàn hoặc xóa khỏi hệ thống, các chi tiết đơn hàng tương ứng cũng tự động bị xóa đồng loạt (<code>ON DELETE CASCADE</code>).</li>
+    <li><strong>fk_order_items_product:</strong> Liên kết giữa <code>order_items.product_id</code> và <code>products.id</code>. Khi một món ăn bị xóa khỏi danh mục bán, trường <code>product_id</code> trong chi tiết hóa đơn cũ chuyển sang <code>NULL</code> (<code>ON DELETE SET NULL</code>). Nhờ có các cột độc lập <code>product_name</code> và <code>price</code>, hóa đơn cũ vẫn hiển thị đầy đủ tên món và giá trị ban đầu.</li>
+  </ul>
+</div>
+
+<!-- CHƯƠNG 4 -->
+<h1>CHƯƠNG 4: KIẾN TRÚC HỆ THỐNG VÀ THIẾT KẾ GIAO DIỆN</h1>
+
+<h2>4.1. Kiến trúc luồng xử lý ứng dụng (MVC-Lite Architecture)</h2>
+<p>
+Hệ thống FoodHouse được tổ chức theo mô hình kiến trúc phân tầng dạng <strong>MVC-Lite</strong> kết hợp hướng mô-đun (Modular Procedure-Oriented), tách biệt rõ ràng giữa các thành phần cấu hình, thư viện dùng chung, giao diện người dùng và điểm cuối API:
+</p>
+<ul>
+  <li><strong>Tầng Cấu hình (Configuration Layer - <code>config/</code>):</strong> Chứa <code>app.php</code> định nghĩa các hằng số hệ thống, phí vận chuyển, đường dẫn gốc; <code>database.php</code> thiết lập kết nối PDO và tự động xử lý Fallback giữa MySQL và SQLite.</li>
+  <li><strong>Tầng Xử lý & Dịch vụ dùng chung (Includes Layer - <code>includes/</code>):</strong>
+    Chứa <code>header.php</code>, <code>navbar.php</code>, <code>footer.php</code> định dạng giao diện đồng nhất; <code>functions.php</code> tập hợp toàn bộ hàm nghiệp vụ (xử lý giỏ hàng Session, định dạng tiền tệ VNĐ, sinh mã đơn hàng, làm sạch dữ liệu); <code>auth.php</code> kiểm soát phân quyền đăng nhập.
+  </li>
+  <li><strong>Tầng Xử lý Bất đồng bộ (AJAX API Layer - <code>api/</code>):</strong> File <code>cart_action.php</code> tiếp nhận các yêu cầu thêm món, cập nhật số lượng và xóa món từ JavaScript, trả về phản hồi định dạng JSON tức thì.</li>
+  <li><strong>Tầng Giao diện người dùng (Views/Pages):</strong> Các trang PHP độc lập (<code>index.php</code>, <code>products.php</code>, <code>product_detail.php</code>, <code>cart.php</code>, <code>checkout.php</code>, <code>orders.php</code>...) đảm nhiệm việc hiển thị dữ liệu và tương tác trực tiếp với khách hàng.</li>
+</ul>
+
+<h2>4.2. Sơ đồ điều hướng website (Sitemap)</h2>
+<p>
+Hệ thống điều hướng của website FoodHouse được bố trí mạch lạc, giúp người dùng dễ dàng chuyển đổi qua lại giữa các khu vực chức năng:
+</p>
+<ul>
+  <li><strong>Trang chủ (<code>index.php</code>):</strong>
+    Banner quảng bá &rarr; Lưới 5 danh mục &rarr; Món ăn nổi bật (Best Seller) &rarr; Chương trình khuyến mãi &rarr; Đánh giá thương hiệu.
+  </li>
+  <li><strong>Thực đơn (<code>products.php</code>):</strong>
+    Thanh tìm kiếm &rarr; Bộ lọc danh mục &rarr; Bộ lọc khoảng giá &rarr; Sắp xếp theo giá &rarr; Lưới danh sách món ăn &rarr; Nút đặt nhanh.
+  </li>
+  <li><strong>Chi tiết món ăn (<code>product_detail.php</code>):</strong>
+    Ảnh lớn &rarr; Tên món, đơn giá, giá gốc &rarr; Thời gian chế biến &rarr; Thành phần chi tiết &rarr; Tùy chọn số lượng &rarr; Nút "Thêm vào giỏ hàng".
+  </li>
+  <li><strong>Giỏ hàng (<code>cart.php</code>):</strong>
+    Danh sách các món đã chọn kèm ảnh &rarr; Nút tăng/giảm số lượng &rarr; Tạm tính tiền món &rarr; Phí vận chuyển 15.000 VNĐ &rarr; Tổng thanh toán &rarr; Nút "Tiến hành đặt hàng".
+  </li>
+  <li><strong>Thanh toán (<code>checkout.php</code>):</strong>
+    Biểu mẫu thông tin giao hàng &rarr; Chọn hình thức COD / Chuyển khoản QR &rarr; Xác nhận đặt món &rarr; Chuyển tiếp tới <code>order_success.php</code>.
+  </li>
+  <li><strong>Tra cứu & Lịch sử đơn (<code>orders.php</code>):</strong>
+    Ô nhập mã đơn/SĐT &rarr; Danh sách đơn hàng &rarr; Thanh trạng thái 4 bước (Chờ xác nhận &rarr; Đang chuẩn bị &rarr; Đang giao &rarr; Đã giao).
+  </li>
+</ul>
+
+<!-- CHƯƠNG 5 -->
+<h1>CHƯƠNG 5: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN</h1>
+
+<h2>5.1. Kết quả đạt được của dự án</h2>
+<p>
+Sau quá trình nghiên cứu, phân tích nghiệp vụ và lập trình triển khai thực tế, dự án <strong>Website bán đồ ăn nhanh trực tuyến FoodHouse</strong> đã hoàn thành xuất sắc các mục tiêu đề ra ban đầu:
+</p>
+<ol>
+  <li><strong>Về mặt phân tích và thiết kế:</strong> Đã chuẩn hóa toàn bộ các kịch bản Use Case, xác định rõ ràng quyền hạn của các tác nhân, xây dựng mô hình cơ sở dữ liệu quan hệ đạt chuẩn 3NF với các ràng buộc toàn vẹn khóa ngoại chặt chẽ.</li>
+  <li><strong>Về mặt tính năng người dùng:</strong> Cung cấp đầy đủ các tiện ích duyệt món, lọc theo danh mục, xem chi tiết nguyên liệu, giỏ hàng AJAX mượt mà, đặt hàng trực quan với mã QR VietQR và tra cứu trạng thái đơn hàng thời gian thực.</li>
+  <li><strong>Về mặt kỹ thuật và tính ổn định:</strong> Triển khai thành công cơ chế <em>Dual-Database Engine</em> độc đáo (MySQL và SQLite fallback), giúp đồ án luôn khởi chạy mượt mà ngay cả trên môi trường máy tính chưa cài đặt sẵn MySQL; mã nguồn được tổ chức khoa học, bảo mật mật khẩu BCRYPT và an toàn trước các lỗ hổng SQL Injection / XSS.</li>
+</ol>
+
+<h2>5.2. Các mặt còn hạn chế</h2>
+<ul>
+  <li>Chưa tích hợp cổng thanh toán trực tuyến tự động IPN (như VNPAY, MoMo, ZaloPay Sandbox) mà hiện tại đang sử dụng mã QR tĩnh kết hợp phương thức COD.</li>
+  <li>Chưa có hệ thống thông báo trạng thái đơn hàng tự động qua tin nhắn SMS hoặc Email tự động cho khách hàng.</li>
+  <li>Giao diện quản trị viên (Admin Dashboard) cần được mở rộng thêm các biểu đồ phân tích trực quan nâng cao (Chart.js) về doanh số theo ngày/tuần/tháng.</li>
+</ul>
+
+<h2>5.3. Hướng phát triển mở rộng trong tương lai</h2>
+<ul>
+  <li><strong>Tích hợp Cổng thanh toán quốc tế và ví điện tử:</strong> Kết nối API VNPAY/MoMo để xử lý trừ tiền tức thời và tự động cập nhật trạng thái đơn sang "Đã thanh toán".</li>
+  <li><strong>Hệ thống mã giảm giá (Voucher & Coupon Code):</strong> Xây dựng bảng khuyến mãi cho phép khách hàng áp mã giảm giá theo phần trăm hoặc trừ tiền trực tiếp trên hóa đơn.</li>
+  <li><strong>Ứng dụng dành cho Shipper & Đánh giá món ăn:</strong> Mở rộng thêm tác nhân Shipper nhận đơn giao qua GPS và chức năng đánh giá sao (Rating) kèm bình luận nhận xét món ăn sau khi thưởng thức.</li>
+</ul>
+
+<h2 style="margin-top: 35px;">Tài liệu tham khảo</h2>
+<ol>
+  <li>Giáo trình Phân tích và Thiết kế Hệ thống Thông tin - Trường ĐH Kinh doanh và Công nghệ Hà Nội.</li>
+  <li>Giáo trình Cơ sở dữ liệu và Hệ quản trị CSDL MySQL - Nhà xuất bản Thông tin và Truyền thông.</li>
+  <li>Tài liệu chính thức PHP & MySQL Documentation: <a href="https://www.php.net/docs.php">https://www.php.net/docs.php</a>.</li>
+  <li>Tiêu chuẩn thiết kế giao diện Bootstrap 5 và Google Material Design trong thương mại điện tử.</li>
+</ol>
+
+</body>
+</html>
